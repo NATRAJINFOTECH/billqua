@@ -12,8 +12,26 @@
     margin: 20px;
     display: flex;
     justify-content: center;
-    height: 100%;
-    width: 100%;
+   
+
+    .official-partner-print {
+  display: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: white;
+  background-color: #e40000; /* Airtel Red */
+  text-align: center;
+  padding: 10px;
+  margin-top: 30px;
+  border-radius: 5px;
+}
+@media print {
+  .official-partner-print {
+    display: block !important;
+  }
+  
+}
+
   }
   .invoice-box {
     background: white;
@@ -82,6 +100,9 @@
     transition: border-color 0.3s;
     background: white;
     color: black;
+    overflow-x: auto;
+    overflow-y: auto;
+    white-space: nowrap;
   }
   input[type="text"]:focus,
   input[type="date"]:focus,
@@ -232,6 +253,23 @@
     .form-check {
       display: none !important;
     }
+    @media print {
+  .official-partner-print {
+    display: block !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    box-sizing: border-box;
+    padding: 10px 0;
+  }
+  /* Add some bottom padding to invoice-box to avoid overlap */
+  .invoice-box {
+    padding-bottom: 60px; /* enough space for banner */
+  }
+}
+
   }
 </style>
 </head>
@@ -242,7 +280,7 @@
     <img src="logo.png" alt="NATRAJ INFOTECH Logo" class="company-logo" />
     <div class="company-details">
       <h1>NATRAJ INFOTECH</h1>
-      <p>Ghanchiwad, Gandevi, dist-Navsari, Gujarat, 39636<br>Natrajinfotech94@gmail.com</p>
+      <p>Ghanchiwad, Gandevi, dist-Navsari, Gujarat, 39636<br>natrajinfotech94@gmail.com</p>
     </div>
   </div>
   <hr />
@@ -257,7 +295,8 @@
     <div class="col-12 col-md-4">
       <h4 id="docTitle">Quotation</h4>
       <label for="quote-date">Date:</label>
-      <input type="date" id="quote-date" />
+     <input type="text" id="quote-date" placeholder="DD/MM/YYYY" />
+
       <span class="print-value" id="print-date"></span>
     </div>
     <div class="col-12 col-md-4">
@@ -345,6 +384,7 @@
   <button class="btn btn-primary mt-3" onclick="printInvoice()">Print</button>
 </div>
 <script>
+  
   function updateDocTitle() {
     const docType = document.getElementById("docType").value;
     document.getElementById("docTitle").textContent = docType;
@@ -549,15 +589,12 @@
 
   // Initial calculation
   calculateTotals();
-
-
-  
 </script>
-<footer id: footer>
-  <p> Official partner of Airtel bharti for Broadband service </p>
-</footer>
+  <div class="official-partner-print">
+    ★ Official Partner of Bharti Airtel for Broadband Services (Airtel Xstream Fiber) ★
+  </div>
+</div> <!-- End of .invoice-box -->
+
+
 </body>
 </html>
-
-
-
