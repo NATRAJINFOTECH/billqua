@@ -281,6 +281,7 @@
     <img src="logo.png" alt="NATRAJ INFOTECH Logo" class="company-logo" />
     <div class="company-details">
       <h1>NATRAJ INFOTECH</h1>
+      <h6>reg.no- GJ/2025/574284944</h6>
       <p>Ghanchiwad, Gandevi, dist-Navsari, Gujarat, 39636<br>natrajinfotech94@gmail.com</p>
       <p>9289234993,9974616106</p>
     </div>
@@ -293,6 +294,7 @@
         <option value="Quotation" selected>Quotation</option>
         <option value="Invoice">Invoice</option>
       </select>
+      
     </div>
     <div class="col-12 col-md-4">
       <h4 id="docTitle">Quotation</h4>
@@ -450,9 +452,19 @@
   }
   function preparePrintValues() {
     // Prepare document fields
-    const dateInput = document.getElementById("quote-date");
-    const dateSpan = document.getElementById("print-date");
-    dateSpan.textContent = dateInput.value ? new Date(dateInput.value).toLocaleDateString() : "";
+   const dateInput = document.getElementById("quote-date");
+const dateSpan = document.getElementById("print-date");
+
+if (dateInput.value) {
+  const dateObj = new Date(dateInput.value);
+  const month = String(dateObj.getDate()).padStart(2, '0');
+  const day = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const year = dateObj.getFullYear();
+  dateSpan.textContent = `${day} ${month} ${year}`;
+} else {
+  dateSpan.textContent = "";
+}
+
     
     const docNumberInput = document.getElementById("docNumber");
     const docNumberSpan = document.getElementById("print-docNumber");
@@ -600,5 +612,6 @@
 
 </body>
 </html>
+
 
 
